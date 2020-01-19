@@ -9,14 +9,18 @@ import {
   Button
 } from "reactstrap";
 class HealthProblemSelector extends Component {
-  state = { problemlist: ["fever", "braincancer", "asthama"] };
+  state = { problemlist: [
+    { name: "Lung Effusion/Infiltration", required: "Lung Scan (X-Ray)" }, 
+    {name: "Brain Tumor", required: "Brain Scan (X-Ray or CT)"}, 
+    {name: "Finger Fracture", required: "Hand X-Ray"}, 
+    {name: "Atelectasis", required: "Lung Scan (X-Ray)"}] };
   render() {
-    var rendercards = this.state.problemlist.map(function(problem) {
+    var rendercards = this.state.problemlist.map(function (problem) {
       return (
-        <div className="col-sm-5" key={problem} style={{ margin: "5px" }}>
+        <div key={problem.name} style={{ margin: "5px" }}>
           <Card>
             <CardBody>
-              <CardTitle>{problem}</CardTitle>
+              <CardTitle>{problem.name}</CardTitle>
               <CardSubtitle>What You'll Require</CardSubtitle>
               <CardText>
                 Blah blah blah scan
@@ -49,14 +53,7 @@ class HealthProblemSelector extends Component {
       console.log("submitted");
     };
     return (
-      <div className="container" style={{ minHeight: "90vh", height: "90vh" }}>
-        <div
-          style={{
-            position: "absolute",
-            top: "10%",
-            left: "30%"
-          }}
-        >
+      <div style={{display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
           <form onSubmit={onSubmit}>
             <div className="row">{rendercards}</div>
             <div className="custom-file" style={{ marginTop: "20px" }}>
@@ -77,7 +74,6 @@ class HealthProblemSelector extends Component {
             </div>
           </form>
         </div>
-      </div>
     );
   }
 }
