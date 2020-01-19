@@ -13,6 +13,13 @@ import {
   ModalFooter
 } from "reactstrap";
 
+const addresses = {
+  "Brain Tumor": "http://127.0.0.1:5000/predict_btumor",
+  Atelectasis: "https://hackdavis-2020-265606.appspot.com/image",
+  "Lung Effusion/Infiltration":
+    "https://hackdavis-2020-265606.appspot.com/image"
+};
+
 class HealthProblemSelector extends Component {
   constructor() {
     super();
@@ -50,33 +57,33 @@ class HealthProblemSelector extends Component {
                 <h3> {problem.name}</h3>
               </CardTitle>
               <CardText>
-                  <em>Requires: {problem.required}</em>
+                <em>Requires: {problem.required}</em>
               </CardText>
             </CardBody>
           </Card>
         </div>
       );
     });
-    const setDisease = (e) => this.setState({message: e})
+    const setDisease = e => this.setState({ message: e });
     const toggle = () => this.setState({ modal: !this.state.modal });
-    const setLoading = (e) => this.setState({ loading: e});
+    const setLoading = e => this.setState({ loading: e });
     const onSubmit = ev => {
       ev.preventDefault();
       var validatedFile = document.getElementById("validatedFile").files[0];
 
-      
       var f = validatedFile;
-      if(!f) return alert('Please add an image')
-      setLoading(true)
+      if (!f) return alert("Please add an image");
+      setLoading(true);
       var r = new FileReader();
 
       r.onload = function(e) {
         var bas64;
         var base64Img = e.target.result;
         bas64 = base64Img;
+        console.log(addresses[that.selected.name]);
 
         console.log(bas64.slice(22));
-        fetch("https://hackdavis-2020-265606.appspot.com/image", {
+        fetch(addresses[that.selected.name], {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -89,13 +96,27 @@ class HealthProblemSelector extends Component {
           .then(response => response.json())
           .then(data => {
             toggle();
-            setLoading(false)
-            console.log(data)
-            setDisease(`${data['No Finding']? "We couldn't find any medical problems in this image": `You might have ${Object.keys(data)[0]} (${Object.values(data)[1]}% probability)`}`)
+            setLoading(false);
+            console.log(data);
+            setDisease(
+              `${
+                data["No Finding"]
+                  ? "We couldn't find any medical problems in this image"
+                  : `You might have ${Object.keys(data)[0]} (${(
+                      Object.values(data)[0] * 100
+                    ).toFixed(1)}% probability)`
+              }`
+            );
           })
-          .catch(ev => {setLoading(false); alert('There was an error with your image. Please try again later.'); console.log(ev)});
+          .catch(ev => {
+            setLoading(false);
+            alert(
+              "There was an error with your image. Please try again later."
+            );
+            console.log(ev);
+          });
       };
-      
+
       r.readAsDataURL(f);
     };
     return (
@@ -107,7 +128,7 @@ class HealthProblemSelector extends Component {
           marginTop: "30px"
         }}
       >
-        <h1 style={{ margin: "20px" }}>
+        <h1 style={{ margin: "20px", marginBottom: "40px" }}>
           What ailments would you like to check today?
         </h1>
         <form onSubmit={onSubmit}>
@@ -142,7 +163,7 @@ class HealthProblemSelector extends Component {
                     className="btn"
                     style={{ paddingLeft: "100px", paddingRight: "100px" }}
                   >
-                    {this.state.loading? 'Loading...' : 'Submit'}
+                    {this.state.loading ? "Loading..." : "Submit"}
                   </Button>
                 </div>
               </div>
