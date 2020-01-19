@@ -14,10 +14,12 @@ import {
 } from "reactstrap";
 
 const addresses = {
-  "Brain Tumor": "http://127.0.0.1:5000/predict_btumor",
+  "Brain Tumor": "http://127.0.0.1:5000/predict",
   Atelectasis: "https://hackdavis-2020-265606.appspot.com/image",
+  "Finger Fracture": "https://hackdavis-2020-265606.appspot.com/image", 
   "Lung Effusion/Infiltration":
-    "https://hackdavis-2020-265606.appspot.com/image"
+    "https://hackdavis-2020-265606.appspot.com/image",
+    "Pneumonia": "http://127.0.0.1:5000/predict"
 };
 
 class HealthProblemSelector extends Component {
@@ -26,10 +28,12 @@ class HealthProblemSelector extends Component {
     this.state = {
       selected: false,
       problemlist: [
-        { name: "Lung Effusion/Infiltration", required: "Lung Scan (X-Ray)" },
-        { name: "Brain Tumor", required: "Brain Scan (X-Ray or CT)" },
-        { name: "Finger Fracture", required: "Hand (X-Ray)" },
-        { name: "Atelectasis", required: "Lung Scan (X-Ray)" }
+        { name: "Lung Effusion/Infiltration", required: "Lung Scan (X-Ray)", code: 'le' },
+        { name: "Brain Tumor", required: "Brain Scan (X-Ray or CT)", code: 'bt' },
+        { name: "Finger Fracture", required: "Hand (X-Ray)", code: 'ff' },
+        { name: "Atelectasis", required: "Lung Scan (X-Ray)", code: 'at' },
+        { name: "Pneumonia", required: "Chest Scan (X-Ray)", code: 'pn' },
+        { name: "Cervical Cancer", required: "Pap Smear", code: 'ps' }
       ]
     };
   }
@@ -90,7 +94,8 @@ class HealthProblemSelector extends Component {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            binImg: bas64
+            binImg: bas64,
+            type: that.selected.code
           })
         })
           .then(response => response.json())
@@ -102,7 +107,7 @@ class HealthProblemSelector extends Component {
               `${
                 data["No Finding"]
                   ? "We couldn't find any medical problems in this image"
-                  : `You might have ${Object.keys(data)[0]} (${(
+                  : `You might have ${that.selected.name} (${(
                       Object.values(data)[0] * 100
                     ).toFixed(1)}% probability)`
               }`
@@ -125,14 +130,15 @@ class HealthProblemSelector extends Component {
           display: "flex",
           justifyContent: "center",
           flexWrap: "wrap",
-          marginTop: "30px"
+          marginTop: "30px",
+          marginBottom: '50px'
         }}
       >
         <h1 style={{ margin: "20px", marginBottom: "40px" }}>
           What ailments would you like to check today?
         </h1>
         <form onSubmit={onSubmit}>
-          <div style={{ display: "flex", flexWrap: "wrap" }}>{rendercards}</div>
+          <div style={{ display: "flex", flexWrap: "wrap" , justifyContent: 'center'}}>{rendercards}</div>
           <div className="custom-file" style={{ marginTop: "20px" }}>
             <input
               type="file"
