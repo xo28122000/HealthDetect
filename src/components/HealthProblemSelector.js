@@ -9,7 +9,8 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Progress
+  Progress,
+  Tooltip
 } from "reactstrap";
 
 const addresses = {
@@ -161,9 +162,6 @@ class HealthProblemSelector extends Component {
         <form
           onSubmit={onSubmit}
           style={{
-            // left: "15%",
-            // right: "15%",
-            // position: "relative",
             width: "70%"
           }}
         >
@@ -217,7 +215,9 @@ class HealthProblemSelector extends Component {
           <ModalHeader toggle={toggle}>Result</ModalHeader>
           <ModalBody>
             {this.state.message}
-            <Progress color="danger" value={this.state.prob} />
+            <Progress color="info" value={this.state.prob} style={{marginTop: '18px'}} id="progress">
+            {Number.parseFloat(this.state.prob).toFixed(1)}% confidence
+            </Progress>
             <p>{this.state.suggession}</p>
           </ModalBody>
           <ModalFooter>
