@@ -9,13 +9,9 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText
 } from "reactstrap";
 import Login from "./components/Login";
+import About from './components/About'
 import HealthProblemSelector from "./components/HealthProblemSelector";
 
 export default function App() {
@@ -29,15 +25,15 @@ export default function App() {
           color="black"
           light
           expand="md"
-          style={{ background: "rgba(201, 231, 242, 1)" }}
+          style={{ background: "rgba(201, 231, 242, 1)", display: 'flex', justifyContent: 'space-between'}}
         >
-          <NavbarBrand href="/">HealthDetect</NavbarBrand>
+          <NavbarBrand href="/select">HealthDetect</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto" navbar>
-              {/* <NavItem>
-                <NavLink href="/login">login</NavLink>
-              </NavItem> */}
+            <Nav className="mr-auto"  navbar>
+              <NavItem>
+                <NavLink href="/about">about</NavLink>
+              </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
@@ -49,7 +45,9 @@ export default function App() {
           <Route path="/login">
             <Login />
           </Route>
-
+          <Route path="/about">
+            <About />
+          </Route>
           <Route path="/">
             <Login />
           </Route>
