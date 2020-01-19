@@ -218,7 +218,9 @@ class HealthProblemSelector extends Component {
         <Modal isOpen={this.state.modal} toggle={toggle} backdrop="static">
           <ModalHeader toggle={toggle}>Result</ModalHeader>
           <ModalBody>
-            {this.state.message} <span id="link123"></span>
+            {this.state.message}
+            <br/>
+            <span id="link123"></span>
             <Progress color="info" value={this.state.prob} style={{marginTop: '18px'}} id="progress">
             {Number.parseFloat(this.state.prob).toFixed(1)}% confidence
             </Progress>
