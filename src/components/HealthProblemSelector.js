@@ -12,50 +12,49 @@ import {
   ModalBody,
   ModalFooter
 } from "reactstrap";
-function convertDataURIToBinary(dataURI) {
-  var BASE64_MARKER = ";base64,";
-  var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
-  var base64 = dataURI.substring(base64Index);
-  var raw = window.atob(base64);
-  var rawLength = raw.length;
-  var array = new Uint8Array(new ArrayBuffer(rawLength));
 
-  for (var i = 0; i < rawLength; i++) {
-    array[i] = raw.charCodeAt(i);
-  }
-  return array;
-}
 class HealthProblemSelector extends Component {
-  state = {
-    modal: false,
-    problemlist: [
-      { name: "Lung Effusion/Infiltration", required: "Lung Scan (X-Ray)" },
-      { name: "Brain Tumor", required: "Brain Scan (X-Ray or CT)" },
-      { name: "Finger Fracture", required: "Hand X-Ray" },
-      { name: "Atelectasis", required: "Lung Scan (X-Ray)" }
-    ]
-  };
+  constructor() {
+    super();
+    this.state = {
+      selected: false,
+      problemlist: [
+        { name: "Lung Effusion/Infiltration", required: "Lung Scan (X-Ray)" },
+        { name: "Brain Tumor", required: "Brain Scan (X-Ray or CT)" },
+        { name: "Finger Fracture", required: "Hand (X-Ray)" },
+        { name: "Atelectasis", required: "Lung Scan (X-Ray)" }
+      ]
+    };
+  }
+
   render() {
+    const setSelected = e => {
+      this.setState({ selected: e });
+    };
+    const that = this.state;
     var rendercards = this.state.problemlist.map(function(problem) {
       return (
-        <div className="col-sm-5" key={problem.name} style={{ margin: "5px" }}>
-          <Card style={{ background: "#cae7f3" }}>
+        <div
+          key={problem.name}
+          style={{ flex: "0 50%" }}
+          onClick={() => setSelected(problem)}
+        >
+          <Card
+            className={` ${
+              that.selected.name === problem.name ? "selected" : "blue-on-hover"
+            }`}
+            style={{ margin: "5px", cursor: "pointer", borderRadius: "8px" }}
+          >
             <CardBody>
-              <CardTitle style={{ background: "#f3d6ca", padding: "10px" }}>
+              <CardTitle>
                 <h3> {problem.name}</h3>
               </CardTitle>
-              <CardSubtitle>What You'll Require</CardSubtitle>
               <CardText>
-                Blah blah blah scan
-                <br />
-                Test->
-                <input
-                  type="radio"
-                  value={problem}
-                  name="exampleRadios"
-                  className="form-check-input radioinput"
-                  style={{ marginLeft: "15px" }}
-                ></input>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <em>Requires: {problem.required}</em>
+                </div>
               </CardText>
             </CardBody>
           </Card>
@@ -112,8 +111,11 @@ class HealthProblemSelector extends Component {
           marginTop: "30px"
         }}
       >
+        <h1 style={{ margin: "20px" }}>
+          What ailments would you like to check today?
+        </h1>
         <form onSubmit={onSubmit}>
-          <div className="row">{rendercards}</div>
+          <div style={{ display: "flex", flexWrap: "wrap" }}>{rendercards}</div>
           <div className="custom-file" style={{ marginTop: "20px" }}>
             <input
               type="file"
@@ -122,13 +124,33 @@ class HealthProblemSelector extends Component {
               accept="image/*"
               name="photo"
             />
-            <label className="custom-file-label">Choose image file...</label>
-            <div className="invalid-feedback">Please input an image!</div>
-            <div style={{ marginTop: "20px" }}>
-              <Button outline color="primary" type="submit" className="btn">
-                Submit
-              </Button>
-            </div>
+            {this.state.selected && (
+              <div>
+                <label
+                  className="custom-file-label"
+                  style={{ cursor: "pointer" }}
+                >
+                  <em>Please upload an image...</em>
+                </label>
+                <div
+                  style={{
+                    marginTop: "20px",
+                    display: "flex",
+                    justifyContent: "center"
+                  }}
+                >
+                  <Button
+                    outline
+                    color="primary"
+                    type="submit"
+                    className="btn"
+                    style={{ paddingLeft: "100px", paddingRight: "100px" }}
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </div>
+            )}
           </div>
         </form>
         <Modal isOpen={this.state.modal} toggle={toggle} backdrop="static">
