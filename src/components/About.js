@@ -1,7 +1,7 @@
 import React from 'react'
 
 const About = () => <div style={{ display: 'flex', justifyContent: 'center' }}>
-    <div style={{ maxWidth: '800px', textAlign: 'left', padding: '25px' }}>
+    <div style={{ maxWidth: '800px', textAlign: 'left', margin: '25px' }}>
         <h1>About HealthDetect®</h1>
         <hr></hr>
         <p>
