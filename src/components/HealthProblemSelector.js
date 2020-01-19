@@ -50,34 +50,27 @@ class HealthProblemSelector extends Component {
                 <h3> {problem.name}</h3>
               </CardTitle>
               <CardText>
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
                   <em>Requires: {problem.required}</em>
-                </div>
               </CardText>
             </CardBody>
           </Card>
         </div>
       );
     });
+    const setDisease = (e) => this.setState({message: e})
     const toggle = () => this.setState({ modal: !this.state.modal });
+    const setLoading = (e) => this.setState({ loading: e});
     const onSubmit = ev => {
       ev.preventDefault();
-      var radioinputs = document.getElementsByClassName("radioinput");
       var validatedFile = document.getElementById("validatedFile").files[0];
 
-      for (var i = 0; i < radioinputs.length; i++) {
-        if (radioinputs[i].type === "radio" && radioinputs[i].checked) {
-          console.log(radioinputs[i].value);
-        }
-      }
-      console.log(validatedFile);
+      
       var f = validatedFile;
+      if(!f) return alert('Please add an image')
+      setLoading(true)
       var r = new FileReader();
 
       r.onload = function(e) {
-        var conv;
         var bas64;
         var base64Img = e.target.result;
         bas64 = base64Img;
@@ -94,13 +87,16 @@ class HealthProblemSelector extends Component {
           })
         })
           .then(response => response.json())
-          .then(data => console.log(data))
-          .catch(ev => console.log(ev));
+          .then(data => {
+            toggle();
+            setLoading(false)
+            console.log(data)
+            setDisease(`${data['No Finding']? "We couldn't find any medical problems in this image": `You might have ${Object.keys(data)[0]} (${Object.values(data)[1]}% probability)`}`)
+          })
+          .catch(ev => {setLoading(false); console.log(ev)});
       };
+      
       r.readAsDataURL(f);
-      console.log("here");
-
-      toggle();
     };
     return (
       <div
@@ -130,7 +126,7 @@ class HealthProblemSelector extends Component {
                   className="custom-file-label"
                   style={{ cursor: "pointer" }}
                 >
-                  <em>Please upload an image...</em>
+                  <em>Upload images here...</em>
                 </label>
                 <div
                   style={{
@@ -146,7 +142,7 @@ class HealthProblemSelector extends Component {
                     className="btn"
                     style={{ paddingLeft: "100px", paddingRight: "100px" }}
                   >
-                    Submit
+                    {this.state.loading? 'Loading...' : 'Submit'}
                   </Button>
                 </div>
               </div>
@@ -155,7 +151,7 @@ class HealthProblemSelector extends Component {
         </form>
         <Modal isOpen={this.state.modal} toggle={toggle} backdrop="static">
           <ModalHeader toggle={toggle}>Result</ModalHeader>
-          <ModalBody>Result json is displayed here</ModalBody>
+          <ModalBody>{this.state.message}</ModalBody>
           <ModalFooter>
             <Button outline color="primary" onClick={toggle}>
               Done
