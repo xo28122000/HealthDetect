@@ -17,10 +17,12 @@ class HealthProblemSelector extends Component {
   render() {
     var rendercards = this.state.problemlist.map(function (problem) {
       return (
-        <div key={problem.name} style={{ margin: "5px" }}>
-          <Card>
+        <div className="col-sm-5" key={problem.name} style={{ margin: "5px" }}>
+          <Card style={{ background: "#cae7f3" }}>
             <CardBody>
-              <CardTitle>{problem.name}</CardTitle>
+              <CardTitle style={{ background: "#f3d6ca", padding: "10px" }}>
+                <h3> {problem.name}</h3>
+              </CardTitle>
               <CardSubtitle>What You'll Require</CardSubtitle>
               <CardText>
                 Blah blah blah scan
@@ -67,9 +69,9 @@ class HealthProblemSelector extends Component {
               <label className="custom-file-label">Choose image file...</label>
               <div className="invalid-feedback">Please input an image!</div>
               <div style={{ marginTop: "20px" }}>
-                <button type="submit" className="btn">
+                <Button outline color="primary" type="submit" className="btn">
                   Submit
-                </button>
+                </Button>
               </div>
             </div>
           </form>

@@ -16,22 +16,27 @@ import {
 } from "reactstrap";
 import Login from "./components/Login";
 import HealthProblemSelector from "./components/HealthProblemSelector";
-import UploadImage from "./components/UploadImage";
+
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
   return (
     <Router>
-      <div>
-        <Navbar color="light" light expand="md">
+      <div style={{ background: "#e9f5fa" }}>
+        <Navbar
+          color="black"
+          light
+          expand="md"
+          style={{ background: "rgba(255, 255, 255, 0.4)" }}
+        >
           <NavbarBrand href="/">HealthDetect</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
-              <NavItem>
+              {/* <NavItem>
                 <NavLink href="/login">login</NavLink>
-              </NavItem>
+              </NavItem> */}
             </Nav>
           </Collapse>
         </Navbar>
@@ -42,9 +47,6 @@ export default function App() {
           </Route>
           <Route path="/login">
             <Login />
-          </Route>
-          <Route path="/UploadImage">
-            <UploadImage />
           </Route>
 
           <Route path="/">
