@@ -93,7 +93,7 @@ class HealthProblemSelector extends Component {
             console.log(data)
             setDisease(`${data['No Finding']? "We couldn't find any medical problems in this image": `You might have ${Object.keys(data)[0]} (${Object.values(data)[1]}% probability)`}`)
           })
-          .catch(ev => {setLoading(false); console.log(ev)});
+          .catch(ev => {setLoading(false); alert('There was an error with your image. Please try again later.'); console.log(ev)});
       };
       
       r.readAsDataURL(f);
