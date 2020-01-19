@@ -32,22 +32,25 @@ class HealthProblemSelector extends Component {
           name: "Lung Effusion/Infiltration",
           required: "Lung Scan (X-Ray)",
           code: "le",
-          related: "Pneumonia"
+          related: "Pneumonia",
+          link: "https://my.clevelandclinic.org/health/diseases/17373-pleural-effusion-causes-signs--treatment/management-and-treatment"
         },
         {
           name: "Brain Tumor",
           required: "Brain Scan (X-Ray or CT)",
-          code: "bt"
+          code: "bt",
+          link: "https://www.ucsfhealth.org/conditions/brain-tumor/treatment"
         },
-        { name: "Finger Fracture", required: "Hand (X-Ray)", code: "ff" },
-        { name: "Atelectasis", required: "Lung Scan (X-Ray)", code: "at" },
+        { name: "Finger Fracture", required: "Hand (X-Ray)", code: "ff" , link:"https://www.medicalnewstoday.com/articles/173312.php#Diagnosis%20and%20treatment"},
+        { name: "Atelectasis", required: "Lung Scan (X-Ray)", code: "at", link:"https://www.mayoclinic.org/diseases-conditions/atelectasis/symptoms-causes/syc-20369684" },
         {
           name: "Pneumonia",
           required: "Chest Scan (X-Ray)",
           code: "pn",
-          related: "Lung Effusion/Infiltration"
+          related: "Lung Effusion/Infiltration",
+          link: "https://www.mayoclinic.org/diseases-conditions/pneumonia/diagnosis-treatment/drc-20354210"
         },
-        { name: "Cervical Cancer", required: "Pap Smear", code: "ps" }
+        { name: "Cervical Cancer", required: "Pap Smear", code: "ps", link: "https://www.mayoclinic.org/diseases-conditions/cervical-cancer/diagnosis-treatment/drc-20352506" }
       ]
     };
   }
@@ -123,9 +126,7 @@ class HealthProblemSelector extends Component {
             let s = `${
               data["No Finding"]
                 ? "We couldn't find any medical problems in this image. "
-                : `You might have ${that.selected.name} (${(
-                    Object.values(data)[0] * 100
-                  ).toFixed(1)}% probability). `
+                : `You might have ${that.selected.name}. <a href=${that.selected.link}>Find symptoms, treatments, and more by clicking here. </a>`
             }`;
             if (that.selected.related)
               setSuggession(
