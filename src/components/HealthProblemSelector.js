@@ -8,7 +8,8 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  Progress
 } from "reactstrap";
 
 const addresses = {
@@ -81,8 +82,10 @@ class HealthProblemSelector extends Component {
       );
     });
     const setDisease = e => this.setState({ message: e });
+    const setSuggession = e => this.setState({ suggession: e });
     const toggle = () => this.setState({ modal: !this.state.modal });
     const setLoading = e => this.setState({ loading: e });
+    const setProb = e => this.setState({ prob: e });
     const onSubmit = ev => {
       ev.preventDefault();
       var validatedFile = document.getElementById("validatedFile").files[0];
@@ -115,6 +118,7 @@ class HealthProblemSelector extends Component {
             toggle();
             setLoading(false);
             console.log(data);
+            setProb(Object.values(data)[0] * 100);
             let s = `${
               data["No Finding"]
                 ? "We couldn't find any medical problems in this image. "
@@ -123,7 +127,9 @@ class HealthProblemSelector extends Component {
                   ).toFixed(1)}% probability). `
             }`;
             if (that.selected.related)
-              s += `You may also want to consider screening for ${that.selected.related}.`;
+              setSuggession(
+                `You may also want to consider screening for:\n ${that.selected.related}.`
+              );
             setDisease(s);
           })
           .catch(ev => {
@@ -199,7 +205,11 @@ class HealthProblemSelector extends Component {
         </form>
         <Modal isOpen={this.state.modal} toggle={toggle} backdrop="static">
           <ModalHeader toggle={toggle}>Result</ModalHeader>
-          <ModalBody>{this.state.message}</ModalBody>
+          <ModalBody>
+            {this.state.message}
+            <Progress color="danger" value={this.state.prob} />
+            <p>{this.state.suggession}</p>
+          </ModalBody>
           <ModalFooter>
             <Button outline color="primary" onClick={toggle}>
               Done
