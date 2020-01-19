@@ -126,13 +126,16 @@ class HealthProblemSelector extends Component {
             let s = `${
               data["No Finding"]
                 ? "We couldn't find any medical problems in this image. "
-                : `You might have ${that.selected.name}. <a href=${that.selected.link}>Find symptoms, treatments, and more by clicking here. </a>`
+                : `You might have ${that.selected.name}.`
             }`;
             if (that.selected.related)
               setSuggession(
                 `You may also want to consider screening for:\n ${that.selected.related}.`
               );
             setDisease(s);
+            if(!data['No Finding']){
+              document.getElementById('link123').innerHTML = ` <a href=${that.selected.link}>Find symptoms, treatments, and more by clicking here. </a>`
+            }
           })
           .catch(ev => {
             setLoading(false);
@@ -215,7 +218,7 @@ class HealthProblemSelector extends Component {
         <Modal isOpen={this.state.modal} toggle={toggle} backdrop="static">
           <ModalHeader toggle={toggle}>Result</ModalHeader>
           <ModalBody>
-            {this.state.message}
+            {this.state.message} <span id="link123"></span>
             <Progress color="info" value={this.state.prob} style={{marginTop: '18px'}} id="progress">
             {Number.parseFloat(this.state.prob).toFixed(1)}% confidence
             </Progress>
