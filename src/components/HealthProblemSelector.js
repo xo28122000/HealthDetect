@@ -9,13 +9,16 @@ import {
   Button
 } from "reactstrap";
 class HealthProblemSelector extends Component {
-  state = { problemlist: [
-    { name: "Lung Effusion/Infiltration", required: "Lung Scan (X-Ray)" }, 
-    {name: "Brain Tumor", required: "Brain Scan (X-Ray or CT)"}, 
-    {name: "Finger Fracture", required: "Hand X-Ray"}, 
-    {name: "Atelectasis", required: "Lung Scan (X-Ray)"}] };
+  state = {
+    problemlist: [
+      { name: "Lung Effusion/Infiltration", required: "Lung Scan (X-Ray)" },
+      { name: "Brain Tumor", required: "Brain Scan (X-Ray or CT)" },
+      { name: "Finger Fracture", required: "Hand X-Ray" },
+      { name: "Atelectasis", required: "Lung Scan (X-Ray)" }
+    ]
+  };
   render() {
-    var rendercards = this.state.problemlist.map(function (problem) {
+    var rendercards = this.state.problemlist.map(function(problem) {
       return (
         <div className="col-sm-5" key={problem.name} style={{ margin: "5px" }}>
           <Card style={{ background: "#cae7f3" }}>
@@ -55,27 +58,34 @@ class HealthProblemSelector extends Component {
       console.log("submitted");
     };
     return (
-      <div style={{display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <form onSubmit={onSubmit}>
-            <div className="row">{rendercards}</div>
-            <div className="custom-file" style={{ marginTop: "20px" }}>
-              <input
-                type="file"
-                className="custom-file-input"
-                id="validatedFile"
-                accept="image/*"
-                required
-              />
-              <label className="custom-file-label">Choose image file...</label>
-              <div className="invalid-feedback">Please input an image!</div>
-              <div style={{ marginTop: "20px" }}>
-                <Button outline color="primary" type="submit" className="btn">
-                  Submit
-                </Button>
-              </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexWrap: "wrap",
+          marginTop: "30px"
+        }}
+      >
+        <form onSubmit={onSubmit}>
+          <div className="row">{rendercards}</div>
+          <div className="custom-file" style={{ marginTop: "20px" }}>
+            <input
+              type="file"
+              className="custom-file-input"
+              id="validatedFile"
+              accept="image/*"
+              required
+            />
+            <label className="custom-file-label">Choose image file...</label>
+            <div className="invalid-feedback">Please input an image!</div>
+            <div style={{ marginTop: "20px" }}>
+              <Button outline color="primary" type="submit" className="btn">
+                Submit
+              </Button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
+      </div>
     );
   }
 }

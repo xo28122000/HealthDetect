@@ -23,12 +23,12 @@ export default function App() {
   const toggle = () => setIsOpen(!isOpen);
   return (
     <Router>
-      <div style={{ background: "#e9f5fa" }}>
+      <div style={{ background: "", height: "100vh" }}>
         <Navbar
           color="black"
           light
           expand="md"
-          style={{ background: "rgba(255, 255, 255, 0.4)" }}
+          style={{ background: "rgba(201, 231, 242, 1)" }}
         >
           <NavbarBrand href="/">HealthDetect</NavbarBrand>
           <NavbarToggler onClick={toggle} />
