@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import {
   Card,
-  CardImg,
   CardText,
   CardBody,
   CardTitle,
-  CardSubtitle,
   Button,
   Modal,
   ModalHeader,
@@ -28,10 +26,10 @@ class HealthProblemSelector extends Component {
     this.state = {
       selected: false,
       problemlist: [
-        { name: "Lung Effusion/Infiltration", required: "Lung Scan (X-Ray)", code: 'le' },
+        { name: "Lung Effusion/Infiltration", required: "Lung Scan (X-Ray)", code: 'le', related: },
         { name: "Brain Tumor", required: "Brain Scan (X-Ray or CT)", code: 'bt' },
-        { name: "Finger Fracture", required: "Hand (X-Ray)", code: 'ff' },
-        { name: "Atelectasis", required: "Lung Scan (X-Ray)", code: 'at' },
+        // { name: "Finger Fracture", required: "Hand (X-Ray)", code: 'ff' },
+        // { name: "Atelectasis", required: "Lung Scan (X-Ray)", code: 'at' },
         { name: "Pneumonia", required: "Chest Scan (X-Ray)", code: 'pn' },
         { name: "Cervical Cancer", required: "Pap Smear", code: 'ps' }
       ]
