@@ -16,10 +16,10 @@ import {
 const addresses = {
   "Brain Tumor": "http://127.0.0.1:5000/predict",
   Atelectasis: "https://hackdavis-2020-265606.appspot.com/image",
-  "Finger Fracture": "https://hackdavis-2020-265606.appspot.com/image", 
+  "Finger Fracture": "https://hackdavis-2020-265606.appspot.com/image",
   "Lung Effusion/Infiltration":
     "https://hackdavis-2020-265606.appspot.com/image",
-    "Pneumonia": "http://127.0.0.1:5000/predict"
+  Pneumonia: "http://127.0.0.1:5000/predict"
 };
 
 class HealthProblemSelector extends Component {
@@ -28,12 +28,20 @@ class HealthProblemSelector extends Component {
     this.state = {
       selected: false,
       problemlist: [
-        { name: "Lung Effusion/Infiltration", required: "Lung Scan (X-Ray)", code: 'le' },
-        { name: "Brain Tumor", required: "Brain Scan (X-Ray or CT)", code: 'bt' },
-        { name: "Finger Fracture", required: "Hand (X-Ray)", code: 'ff' },
-        { name: "Atelectasis", required: "Lung Scan (X-Ray)", code: 'at' },
-        { name: "Pneumonia", required: "Chest Scan (X-Ray)", code: 'pn' },
-        { name: "Cervical Cancer", required: "Pap Smear", code: 'ps' }
+        {
+          name: "Lung Effusion/Infiltration",
+          required: "Lung Scan (X-Ray)",
+          code: "le"
+        },
+        {
+          name: "Brain Tumor",
+          required: "Brain Scan (X-Ray or CT)",
+          code: "bt"
+        },
+        { name: "Finger Fracture", required: "Hand (X-Ray)", code: "ff" },
+        { name: "Atelectasis", required: "Lung Scan (X-Ray)", code: "at" },
+        { name: "Pneumonia", required: "Chest Scan (X-Ray)", code: "pn" },
+        { name: "Cervical Cancer", required: "Pap Smear", code: "ps" }
       ]
     };
   }
@@ -131,14 +139,22 @@ class HealthProblemSelector extends Component {
           justifyContent: "center",
           flexWrap: "wrap",
           marginTop: "30px",
-          marginBottom: '50px'
+          marginBottom: "50px"
         }}
       >
         <h1 style={{ margin: "20px", marginBottom: "40px" }}>
           What ailments would you like to check today?
         </h1>
         <form onSubmit={onSubmit}>
-          <div style={{ display: "flex", flexWrap: "wrap" , justifyContent: 'center'}}>{rendercards}</div>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center"
+            }}
+          >
+            {rendercards}
+          </div>
           <div className="custom-file" style={{ marginTop: "20px" }}>
             <input
               type="file"
