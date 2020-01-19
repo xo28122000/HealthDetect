@@ -27,11 +27,13 @@ class Login extends Component {
             style={{
               background: "#cae7f3",
               borderRadius: "8px",
-              paddingBottom: '25px'
+              paddingBottom: "25px"
             }}
           >
             <Form>
-              <h3 style={{paddingTop: '25px', paddingBottom: '25px'}}>Log In</h3>
+              <h3 style={{ paddingTop: "25px", paddingBottom: "25px" }}>
+                Log In
+              </h3>
               <FormGroup>
                 <Label for="exampleEmail">Email</Label>
                 <Input
@@ -39,6 +41,7 @@ class Login extends Component {
                   name="email"
                   id="exampleEmail"
                   placeholder="Enter your email..."
+                  required
                 />
               </FormGroup>
               <FormGroup>
@@ -48,6 +51,7 @@ class Login extends Component {
                   name="password"
                   id="examplePassword"
                   placeholder="Enter your password..."
+                  required
                 />
               </FormGroup>
 

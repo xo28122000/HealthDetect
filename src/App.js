@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import React, { useState } from "react";
-import './App.css'
+import "./App.css";
 import {
   Collapse,
   Navbar,
@@ -8,10 +8,10 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
+  NavLink
 } from "reactstrap";
 import Login from "./components/Login";
-import About from './components/About'
+import About from "./components/About";
 import HealthProblemSelector from "./components/HealthProblemSelector";
 
 export default function App() {
@@ -25,14 +25,31 @@ export default function App() {
           color="black"
           light
           expand="md"
-          style={{ background: "rgba(201, 231, 242, 1)", display: 'flex', justifyContent: 'space-between'}}
+          style={{
+            background: "rgba(201, 231, 242, 1)",
+            display: "flex",
+            justifyContent: "space-between"
+          }}
         >
-          <NavbarBrand href="/select">HealthDetect</NavbarBrand>
+          <NavbarBrand href="/select">
+            <h2>HealthDetect</h2>
+          </NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto"  navbar>
+            <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink href="/about">about</NavLink>
+                <NavLink href="/about">About</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/login">Get Started</NavLink>
+              </NavItem>
+            </Nav>
+            <Nav className="justify-content-end" navbar>
+              <NavItem>
+                <NavLink href="#">Dashboard</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/login">Login</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
