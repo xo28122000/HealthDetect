@@ -134,7 +134,7 @@ class HealthProblemSelector extends Component {
               );
             setDisease(s);
             if(!data['No Finding']){
-              document.getElementById('link123').innerHTML = ` <a href=${that.selected.link}>Find symptoms, treatments, and more by clicking here. </a>`
+              document.getElementById('link123').innerHTML = ` <a target="blank" href=${that.selected.link}>Find symptoms, treatments, and more by clicking here. </a>`
             }
           })
           .catch(ev => {
