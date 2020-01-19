@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import {
   Card,
-  CardImg,
   CardText,
   CardBody,
   CardTitle,
-  CardSubtitle,
   Button,
   Modal,
   ModalHeader,
@@ -31,16 +29,22 @@ class HealthProblemSelector extends Component {
         {
           name: "Lung Effusion/Infiltration",
           required: "Lung Scan (X-Ray)",
-          code: "le"
+          code: "le",
+          related: "Pneumonia"
         },
         {
           name: "Brain Tumor",
           required: "Brain Scan (X-Ray or CT)",
           code: "bt"
         },
-        { name: "Finger Fracture", required: "Hand (X-Ray)", code: "ff" },
-        { name: "Atelectasis", required: "Lung Scan (X-Ray)", code: "at" },
-        { name: "Pneumonia", required: "Chest Scan (X-Ray)", code: "pn" },
+        // { name: "Finger Fracture", required: "Hand (X-Ray)", code: 'ff' },
+        // { name: "Atelectasis", required: "Lung Scan (X-Ray)", code: 'at' },
+        {
+          name: "Pneumonia",
+          required: "Chest Scan (X-Ray)",
+          code: "pn",
+          related: "Lung Effusion/Infiltration"
+        },
         { name: "Cervical Cancer", required: "Pap Smear", code: "ps" }
       ]
     };
@@ -111,15 +115,16 @@ class HealthProblemSelector extends Component {
             toggle();
             setLoading(false);
             console.log(data);
-            setDisease(
-              `${
-                data["No Finding"]
-                  ? "We couldn't find any medical problems in this image"
-                  : `You might have ${that.selected.name} (${(
-                      Object.values(data)[0] * 100
-                    ).toFixed(1)}% probability)`
-              }`
-            );
+            let s = `${
+              data["No Finding"]
+                ? "We couldn't find any medical problems in this image. "
+                : `You might have ${that.selected.name} (${(
+                    Object.values(data)[0] * 100
+                  ).toFixed(1)}% probability). `
+            }`;
+            if (that.selected.related)
+              s += `You may also want to consider screening for ${that.selected.related}.`;
+            setDisease(s);
           })
           .catch(ev => {
             setLoading(false);

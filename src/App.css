@@ -41,6 +41,21 @@
   
 }
 
+.shadow {
+  -webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.5);
+
+}
+
+img {
+  align-self: center;
+}
+
+p {
+  padding-top: 15px
+}
+
 .selected {
   -webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.5);
   -moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.5);
