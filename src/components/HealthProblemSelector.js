@@ -38,8 +38,8 @@ class HealthProblemSelector extends Component {
           required: "Brain Scan (X-Ray or CT)",
           code: "bt"
         },
-        // { name: "Finger Fracture", required: "Hand (X-Ray)", code: 'ff' },
-        // { name: "Atelectasis", required: "Lung Scan (X-Ray)", code: 'at' },
+        { name: "Finger Fracture", required: "Hand (X-Ray)", code: "ff" },
+        { name: "Atelectasis", required: "Lung Scan (X-Ray)", code: "at" },
         {
           name: "Pneumonia",
           required: "Chest Scan (X-Ray)",
@@ -153,10 +153,20 @@ class HealthProblemSelector extends Component {
           marginBottom: "50px"
         }}
       >
-        <h1 style={{ margin: "20px", marginBottom: "40px" }}>
+        <h1
+          style={{ margin: "20px", marginBottom: "40px", textAlign: "center" }}
+        >
           What ailments would you like to check today?
         </h1>
-        <form onSubmit={onSubmit}>
+        <form
+          onSubmit={onSubmit}
+          style={{
+            // left: "15%",
+            // right: "15%",
+            // position: "relative",
+            width: "70%"
+          }}
+        >
           <div
             style={{
               display: "flex",
