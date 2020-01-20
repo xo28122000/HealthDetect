@@ -29,20 +29,21 @@ const About = () => (
       <h1>About HealthDetect®</h1>
       <hr></hr>
       <p>
-        Healthcare check-ups are expensive, invasive, and time-consuming. What
-        if there was a way to automate these procedures? A computer could take
-        the role of a doctor in determining whether or not you have certain
-        diseases. We know that there are a lot of models already exist for
-        detection some specific diseases. But how could to average person know
-        how to deploy (much less train) a neural net according to a research
-        paper? We introduce HealthDe.tech to solve this problem, an centralized
-        app which gives users a multitude of options for diseases they want to
-        check-up on. We curated some of the most common diseases that could be
-        detected accurately using machine learning and computer vision. We then
-        trained state-of-art TensorFlow models according to medical research
-        papers. Finally, we deployed these models on Google's Cloud Platform and
-        verified them against a model trained on Google's AutoML Vision API to
-        deliver fast, accurate results to anyone who decides to use our service.
+        Healthcare check-ups are expensive, invasive, and
+        time-consuming. What if there was a way to automate these procedures? A
+        computer could take the role of a doctor in determining whether or not
+        you have certain diseases. We know that there are a lot of models
+        already exist for detection some specific diseases. But how could to
+        average person know how to deploy (much less train) a neural net
+        according to a research paper? We introduce HealthDe.tech to solve this
+        problem, an centralized app which gives users a multitude of options for
+        diseases they want to check-up on. We curated some of the most common
+        diseases that could be detected accurately using machine learning and
+        computer vision. We then trained state-of-art TensorFlow models
+        according to medical research papers. Finally, we deployed these models
+        on Google's Cloud Platform and verified them against a model trained on
+        Google's AutoML Vision API to deliver fast, accurate results to anyone
+        who decides to use our service.
       </p>
       <div style={{ textAlign: "center" }}>
         <img src="https://assets.aboutkidshealth.ca/akhassets/BT_Neuro_MRI2_MEDIMG-PHO_EN.jpg?RenditionID=10" />
